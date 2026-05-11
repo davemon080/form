@@ -1,0 +1,573 @@
+:root {
+  --bg: #f3f8f6;
+  --surface: #ffffff;
+  --text: #11211b;
+  --muted: #587066;
+  --accent: #0f766e;
+  --accent-strong: #0b5f58;
+  --error: #dc2626;
+  --success: #15803d;
+  --border: #c8d8d0;
+  --field-bg: #fbfefd;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  position: relative;
+  overflow-x: hidden;
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Plus Jakarta Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: radial-gradient(circle at 20% 10%, #e3ecff 0%, #f6f8ff 42%, #eef3ff 100%);
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 40px 16px 48px;
+}
+
+.bg-shape {
+  position: absolute;
+  border-radius: 999px;
+  filter: blur(30px);
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.faq-menu {
+  position: fixed;
+  top: 18px;
+  right: 8px;
+  z-index: 5;
+}
+
+.faq-toggle {
+  border: none;
+  background: transparent;
+  color: #4c1d95;
+  border-radius: 0;
+  padding: 0;
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.faq-toggle:hover {
+  color: #6d28d9;
+}
+
+.faq-toggle:focus-visible {
+  outline: 2px solid rgba(109, 40, 217, 0.4);
+  outline-offset: 6px;
+  border-radius: 8px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+.faq-panel {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  width: min(320px, calc(100vw - 24px));
+  background: rgba(255, 255, 255, 0.78);
+  border: 1px solid rgba(17, 33, 27, 0.1);
+  border-radius: 14px;
+  padding: 12px 12px 8px;
+  backdrop-filter: blur(6px);
+}
+
+.faq-panel h2 {
+  margin: 0 0 8px;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.faq-panel details {
+  border-top: 1px solid rgba(17, 33, 27, 0.1);
+  padding: 8px 0;
+}
+
+.faq-panel summary {
+  cursor: pointer;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.faq-panel p {
+  margin: 6px 0 0;
+  font-size: 0.79rem;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.shape-a {
+  width: 280px;
+  height: 280px;
+  top: -80px;
+  left: -60px;
+  background: #bfdbfe;
+}
+
+.shape-b {
+  width: 240px;
+  height: 240px;
+  right: -70px;
+  bottom: -50px;
+  background: #c4b5fd;
+}
+
+.form-header,
+.contact-form {
+  position: relative;
+  z-index: 1;
+}
+
+.brand-bar,
+.form-header,
+.contact-form,
+.success-section,
+.page-footer {
+  width: 100%;
+  max-width: 760px;
+}
+
+.brand-bar {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.brand-logo {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(17, 33, 27, 0.08);
+  padding: 5px;
+}
+
+.brand-name {
+  margin: 0;
+  font-weight: 800;
+  font-size: clamp(1.1rem, 1.7vw, 1.35rem);
+  letter-spacing: 0.01em;
+}
+
+.form-header h1 {
+  margin: 0 0 8px;
+  font-size: clamp(2rem, 2.4vw, 2.4rem);
+}
+
+.form-header p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.contact-form {
+  margin-top: 22px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.form-field {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.field-label {
+  position: absolute;
+  top: 50%;
+  left: 34px;
+  transform: translateY(-50%);
+  z-index: 2;
+  background: transparent;
+  padding: 0 2px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.8rem;
+  letter-spacing: 0.01em;
+  line-height: 1.2;
+  color: var(--muted);
+  pointer-events: none;
+  white-space: nowrap;
+  max-width: calc(100% - 52px);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transform-origin: left center;
+  transition: top 0.2s ease, transform 0.2s ease, font-size 0.2s ease, color 0.2s ease, background-color 0.2s ease, padding 0.2s ease;
+}
+
+.input-wrap {
+  position: relative;
+  margin-top: 0;
+}
+
+.field-icon,
+.chevron-icon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #628276;
+  font-size: 0.95rem;
+}
+
+.field-icon {
+  left: 14px;
+}
+
+.chevron-icon {
+  right: 14px;
+  font-size: 0.85rem;
+  pointer-events: none;
+}
+
+.form-field input,
+.form-field select {
+  width: 100%;
+  padding: 14px 12px 10px 36px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  font-size: 0.9rem;
+  background: var(--field-bg);
+  color: var(--text);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.form-field:focus-within .field-label,
+.form-field.has-value .field-label {
+  top: 0;
+  transform: translateY(-50%);
+  font-size: 0.72rem;
+  color: var(--accent);
+  background: var(--field-bg);
+  padding: 0 7px;
+}
+
+.form-field input:focus,
+.form-field select:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px rgba(15, 118, 110, 0.14);
+}
+
+.form-field select {
+  appearance: none;
+  padding-right: 40px;
+}
+
+.form-field.has-error input,
+.form-field.has-error select {
+  border-color: var(--error);
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.12);
+}
+
+.form-field.is-valid input,
+.form-field.is-valid select {
+  border-color: var(--success);
+}
+
+.form-field.full-width {
+  grid-column: 1 / -1;
+}
+
+.error-message {
+  color: var(--error);
+  min-height: 18px;
+  font-size: 0.86rem;
+}
+
+.consent-note {
+  margin: 14px 0 0;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(109, 40, 217, 0.25);
+  background: rgba(109, 40, 217, 0.06);
+  color: #4c1d95;
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+.submit-button {
+  width: 100%;
+  margin-top: 12px;
+  padding: 16px 18px;
+  border: none;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #7c3aed, #6d28d9);
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.submit-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 14px 28px rgba(109, 40, 217, 0.32);
+}
+
+.submit-button:active {
+  transform: translateY(0);
+}
+
+.result-message {
+  margin: 20px 0 0;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--muted);
+}
+
+.result-message.success {
+  color: var(--success);
+}
+
+.success-section {
+  position: relative;
+  z-index: 1;
+  margin-top: 24px;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(21, 128, 61, 0.22);
+  border-radius: 20px;
+  padding: 26px 22px;
+  backdrop-filter: blur(6px);
+}
+
+.success-icon-wrap {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(21, 128, 61, 0.12);
+  color: var(--success);
+  font-size: 1.5rem;
+}
+
+.success-section h2 {
+  margin: 12px 0 6px;
+  font-size: clamp(1.2rem, 2vw, 1.45rem);
+}
+
+.success-section p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.secondary-button {
+  margin-top: 16px;
+  border: 1px solid var(--border);
+  background: #fff;
+  color: var(--text);
+  border-radius: 12px;
+  padding: 10px 14px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.secondary-button:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateY(-1px);
+}
+
+.page-footer {
+  position: relative;
+  z-index: 1;
+  margin-top: auto;
+  padding-top: 28px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--muted);
+  text-align: center;
+}
+
+@media (max-width: 640px) {
+  body {
+    justify-content: flex-start;
+    padding-top: 70px;
+  }
+
+  .faq-menu {
+    position: fixed;
+    top: 14px;
+    right: 8px;
+    z-index: 5;
+    width: auto;
+    max-width: none;
+    margin-bottom: 0;
+  }
+
+  .faq-toggle {
+    width: auto;
+    font-size: 1.4rem;
+  }
+
+  .faq-panel {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    margin-top: 0;
+    width: min(300px, calc(100vw - 20px));
+  }
+
+  .brand-bar {
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+
+  .brand-logo {
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+  }
+
+  .brand-name {
+    font-size: 1.05rem;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .form-header h1 {
+    font-size: 1.65rem;
+  }
+
+  .field-label {
+    left: 32px;
+    font-size: 0.76rem;
+    max-width: calc(100% - 46px);
+  }
+
+  .form-field input,
+  .form-field select {
+    padding: 13px 11px 9px 34px;
+  }
+
+  .field-icon {
+    left: 12px;
+    font-size: 0.88rem;
+  }
+
+  .success-section {
+    margin-top: 20px;
+    padding: 20px 16px;
+    border-radius: 16px;
+  }
+}
+
+@media (max-width: 520px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .form-header h1 {
+    font-size: 1.45rem;
+    line-height: 1.2;
+  }
+
+  .form-header p {
+    font-size: 0.92rem;
+  }
+}
+
+@media (max-width: 420px) {
+  body {
+    padding: 68px 12px 24px;
+  }
+
+  .brand-logo {
+    width: 38px;
+    height: 38px;
+  }
+
+  .brand-name {
+    font-size: 0.98rem;
+  }
+
+  .field-label {
+    left: 30px;
+    font-size: 0.74rem;
+  }
+
+  .form-field input,
+  .form-field select,
+  .submit-button {
+    font-size: 0.95rem;
+  }
+
+  .form-field input,
+  .form-field select {
+    padding: 13px 10px 9px 32px;
+  }
+
+  .field-icon {
+    left: 11px;
+  }
+
+  .faq-menu {
+    top: 14px;
+    right: 8px;
+    position: fixed;
+    z-index: 5;
+    width: auto;
+    max-width: none;
+    margin-bottom: 0;
+  }
+
+  .faq-panel {
+    right: 0;
+    width: min(300px, calc(100vw - 20px));
+  }
+
+  .consent-note {
+    font-size: 0.78rem;
+    padding: 9px 10px;
+  }
+
+  .page-footer {
+    padding-top: 18px;
+    font-size: 0.8rem;
+  }
+}
