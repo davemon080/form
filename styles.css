@@ -147,6 +147,8 @@ body {
 .page-footer {
   width: 100%;
   max-width: 760px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .main-container {
@@ -173,6 +175,10 @@ body {
 }
 
 @media (min-width: 900px) {
+  .brand-bar {
+    max-width: 1200px;
+  }
+
   .image-section {
     display: flex;
   }
@@ -189,6 +195,7 @@ body {
   z-index: 1;
   display: flex;
   align-items: center;
+  justify-content: flex-start;
   gap: 12px;
   margin-bottom: 18px;
 }
@@ -484,6 +491,15 @@ body {
     padding-top: 70px;
   }
 
+  .main-container {
+    display: block;
+  }
+
+  .form-section {
+    width: 100%;
+    max-width: 100%;
+  }
+
   .faq-menu {
     position: fixed;
     top: 14px;
@@ -528,7 +544,7 @@ body {
   }
 
   .name-row {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     gap: 14px;
   }
 
@@ -566,7 +582,7 @@ body {
   }
 
   .name-row {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     gap: 12px;
   }
 
@@ -615,7 +631,7 @@ body {
   }
 
   .name-row {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     gap: 10px;
   }
 

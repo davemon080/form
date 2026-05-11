@@ -12,6 +12,7 @@ A frontend onboarding form for the Nexlify Innovation training program. Collects
 | Email | email | Yes |
 | Phone Number | tel | Yes |
 | Service Interest | select | Yes (graphic-design or web-development) |
+| Learning Device & Setup | select | Yes (changes by selected service) |
 
 ## Database Schema (PostgreSQL)
 
@@ -24,6 +25,7 @@ CREATE TABLE IF NOT EXISTS onboarding_submissions (
   email VARCHAR(190) NOT NULL,
   phone_number VARCHAR(30) NOT NULL,
   training_interest VARCHAR(100) NOT NULL,
+  learning_device VARCHAR(50) NOT NULL,
   whatsapp_consent BOOLEAN NOT NULL DEFAULT true,
   schedule_email_consent BOOLEAN NOT NULL DEFAULT true,
   submitted_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
@@ -31,6 +33,21 @@ CREATE TABLE IF NOT EXISTS onboarding_submissions (
 
 CREATE INDEX idx_email ON onboarding_submissions(email);
 CREATE INDEX idx_phone ON onboarding_submissions(phone_number);
+CREATE INDEX idx_learning_device ON onboarding_submissions(learning_device);
+```
+
+If your table already exists, run this migration:
+
+```sql
+ALTER TABLE onboarding_submissions
+ADD COLUMN IF NOT EXISTS learning_device VARCHAR(50);
+
+UPDATE onboarding_submissions
+SET learning_device = 'unknown'
+WHERE learning_device IS NULL;
+
+ALTER TABLE onboarding_submissions
+ALTER COLUMN learning_device SET NOT NULL;
 ```
 
 ## Vercel Deployment
