@@ -77,7 +77,10 @@ const configureDeviceField = () => {
   learningDeviceField.required = hasService;
 
   options.forEach((option) => {
-    option.hidden = hasService && option.dataset.category !== selectedService;
+    const isMatchingCategory = option.dataset.category === selectedService;
+    const shouldHide = hasService && !isMatchingCategory;
+    option.hidden = shouldHide;
+    option.disabled = shouldHide;
   });
 
   if (!hasService) {
