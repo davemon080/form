@@ -125,3 +125,17 @@ Start the server:
 ```bash
 npm run dev
 ```
+
+## Vercel Deployment
+
+1. Push this repo to GitHub
+2. Import to Vercel
+3. Add environment variable: `DATABASE_URL` with your Neon connection string
+4. The `api/submissions.js` will be deployed as a serverless function
+
+## Responsive Design
+
+The form is mobile-responsive with:
+- Single-column layout on screens below 640px width
+- Grid layout (2 columns) on larger screens
+- Touch-friendly button sizes and input fields
