@@ -1,12 +1,49 @@
 const form = document.getElementById('contactForm');
 const resultMessage = document.getElementById('resultMessage');
-const successSection = document.getElementById('successSection');
-const successText = document.getElementById('successText');
-const newSubmissionBtn = document.getElementById('newSubmissionBtn');
 const submitButton = form.querySelector('.submit-button');
 const defaultSubmitMarkup = submitButton.innerHTML;
 const faqToggleBtn = document.getElementById('faqToggleBtn');
 const faqPanel = document.getElementById('faqPanel');
+const serviceField = document.getElementById('service');
+const deviceContainer = document.getElementById('deviceSelectionContainer');
+const deviceLabel = document.getElementById('deviceLabel');
+const learningDeviceField = document.getElementById('learningDevice');
+
+const serviceDisplayName = {
+  'graphic-design': 'creative graphic designing',
+  'web-development': 'web development'
+};
+
+const configureDeviceField = () => {
+  const selectedService = serviceField.value;
+  const hasService = selectedService !== '';
+  const options = learningDeviceField.querySelectorAll('option[data-category]');
+
+  deviceContainer.hidden = !hasService;
+  learningDeviceField.required = hasService;
+
+  options.forEach((option) => {
+    option.hidden = hasService && option.dataset.category !== selectedService;
+  });
+
+  if (!hasService) {
+    deviceLabel.textContent = 'Learning Device & Setup *';
+  } else if (selectedService === 'graphic-design') {
+    deviceLabel.textContent = 'Preferred Learning Device *';
+  } else {
+    deviceLabel.textContent = 'Do You Have a Laptop? *';
+  }
+
+  const selectedOption = learningDeviceField.selectedOptions[0];
+  const isSelectedOptionValid =
+    selectedOption && (!selectedOption.dataset.category || selectedOption.dataset.category === selectedService);
+
+  if (!isSelectedOptionValid) {
+    learningDeviceField.value = '';
+  }
+
+  syncFloatingState(learningDeviceField);
+};
 
 const syncFloatingState = (input) => {
   const formField = input.closest('.form-field');
@@ -48,6 +85,7 @@ const validateForm = () => {
     document.getElementById('email'),
     document.getElementById('phone'),
     document.getElementById('service'),
+    learningDeviceField,
   ];
 
   return fields.reduce((isValid, input) => validateInput(input) && isValid, true);
@@ -82,6 +120,7 @@ form.addEventListener('submit', async (event) => {
     email: form.email.value.trim(),
     phone: form.phone.value.trim(),
     service: form.service.value,
+    learningDevice: learningDeviceField.value,
   };
 
   try {
@@ -97,17 +136,17 @@ form.addEventListener('submit', async (event) => {
       throw new Error(data.error || 'Submission failed');
     }
 
-    resultMessage.textContent = `Thank you, ${formData.firstName}! Your ${
-      formData.service === 'graphic-design' ? 'creative graphic designing' : 'web development'
-    } request has been submitted.`;
+    resultMessage.textContent = `Thank you, ${formData.firstName}! Your ${serviceDisplayName[formData.service]} request has been submitted.`;
     resultMessage.classList.add('success');
-    successText.textContent = `Thank you, ${formData.firstName}. Your ${
-      formData.service === 'graphic-design' ? 'creative graphic designing' : 'web development'
-    } request has been submitted successfully. You will be added to the training WhatsApp group using your phone number, and your class schedule will be sent to your email.`;
-    successSection.hidden = false;
-    form.hidden = true;
-    document.querySelector('.form-header').hidden = true;
+
+    const successParams = new URLSearchParams({
+      firstName: formData.firstName,
+      service: serviceDisplayName[formData.service]
+    });
+
     form.reset();
+    configureDeviceField();
+    window.location.href = `success.html?${successParams.toString()}`;
   } catch (error) {
     console.error('Submission error:', error);
     const message = error.message || 'Submission failed';
@@ -133,22 +172,12 @@ inputs.forEach((input) => {
   input.addEventListener('change', () => syncFloatingState(input));
 });
 
-newSubmissionBtn.addEventListener('click', () => {
-  successSection.hidden = true;
-  form.hidden = false;
-  document.querySelector('.form-header').hidden = false;
-  setSubmittingState(false);
-  resultMessage.textContent = '';
-  resultMessage.classList.remove('success');
-
-  form.querySelectorAll('.form-field').forEach((field) => {
-    field.classList.remove('has-error', 'is-valid', 'has-value');
-    const error = field.querySelector('.error-message');
-    if (error) {
-      error.textContent = '';
-    }
-  });
+serviceField.addEventListener('change', () => {
+  configureDeviceField();
+  validateInput(learningDeviceField);
 });
+
+configureDeviceField();
 
 if (faqToggleBtn && faqPanel) {
   faqToggleBtn.addEventListener('click', () => {

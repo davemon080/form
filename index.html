@@ -96,6 +96,25 @@
             </div>
             <small class="error-message"></small>
           </label>
+
+          <!-- Conditional Device Selection Section -->
+          <div id="deviceSelectionContainer" class="form-field full-width" hidden>
+            <span id="deviceLabel" class="field-label">Learning Device & Setup *</span>
+            <div class="input-wrap select-wrap">
+              <i class="fa-solid fa-desktop field-icon" aria-hidden="true"></i>
+              <select id="learningDevice" name="learningDevice">
+                <option value=""></option>
+                <!-- Graphic Design Specific Options -->
+                <option value="gd-mobile" data-category="graphic-design">Mobile Phone</option>
+                <option value="gd-laptop" data-category="graphic-design">Laptop</option>
+                <!-- Web Development Specific Options -->
+                <option value="wd-yes" data-category="web-development">Yes, I have a laptop</option>
+                <option value="wd-no" data-category="web-development">No, I do not have a laptop</option>
+              </select>
+              <i class="fa-solid fa-chevron-down chevron-icon" aria-hidden="true"></i>
+            </div>
+            <small class="error-message"></small>
+          </div>
         </div>
         <p class="consent-note">
           By submitting this form, you agree that your phone number will be used to add you to the training WhatsApp group, and your class schedule will be sent to your email.
@@ -111,17 +130,6 @@
       <img src="logo.png" alt="Training illustration" class="side-image" />
     </div>
   </div>
-  <section id="successSection" class="success-section" aria-live="polite" hidden>
-    <div class="success-icon-wrap" aria-hidden="true">
-      <i class="fa-solid fa-circle-check"></i>
-    </div>
-    <h2>Form Submitted Successfully</h2>
-    <p id="successText">Thanks! We have received your request and will reach out soon.</p>
-    <button id="newSubmissionBtn" type="button" class="secondary-button">
-      <i class="fa-solid fa-pen-to-square" aria-hidden="true"></i>
-      Submit Another Response
-    </button>
-  </section>
   <footer class="page-footer">Powered by Nexlify Innovations</footer>
   <script src="script.js"></script>
 </body>

@@ -407,6 +407,21 @@ body {
   backdrop-filter: blur(6px);
 }
 
+.standalone-success h1 {
+  margin: 12px 0 6px;
+  font-size: clamp(1.3rem, 2.2vw, 1.5rem);
+}
+
+.success-page {
+  align-items: center;
+}
+
+.success-page .brand-bar,
+.success-page .success-section,
+.success-page .page-footer {
+  max-width: 760px;
+}
+
 .success-icon-wrap {
   width: 54px;
   height: 54px;

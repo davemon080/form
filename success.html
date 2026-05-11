@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Submission Successful</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="success-page">
+  <div class="bg-shape shape-a" aria-hidden="true"></div>
+  <div class="bg-shape shape-b" aria-hidden="true"></div>
+
+  <div class="brand-bar">
+    <img src="logo.png" alt="Nexlify Innovation logo" class="brand-logo" />
+    <p class="brand-name">Nexlify Innovation</p>
+  </div>
+
+  <section class="success-section standalone-success" aria-live="polite">
+    <div class="success-icon-wrap" aria-hidden="true">
+      <i class="fa-solid fa-circle-check"></i>
+    </div>
+    <h1>Form Submitted Successfully</h1>
+    <p id="successMessage">Thanks! We have received your request and will reach out soon.</p>
+    <a href="index.html" class="secondary-button">
+      <i class="fa-solid fa-pen-to-square" aria-hidden="true"></i>
+      Submit Another Response
+    </a>
+  </section>
+
+  <footer class="page-footer">Powered by Nexlify Innovations</footer>
+
+  <script>
+    const successMessage = document.getElementById('successMessage');
+    const params = new URLSearchParams(window.location.search);
+    const firstName = params.get('firstName');
+    const service = params.get('service');
+
+    if (firstName && service) {
+      successMessage.textContent = `Thank you, ${firstName}. Your ${service} request has been submitted successfully. You will be added to the training WhatsApp group using your phone number, and your class schedule will be sent to your email.`;
+    }
+  </script>
+</body>
+</html>
