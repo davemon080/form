@@ -9,6 +9,60 @@ const deviceContainer = document.getElementById('deviceSelectionContainer');
 const deviceLabel = document.getElementById('deviceLabel');
 const learningDeviceField = document.getElementById('learningDevice');
 
+const showToast = (message, variant = 'success') => {
+  const existingToast = document.querySelector('.toast');
+  if (existingToast) {
+    existingToast.remove();
+  }
+
+  const toast = document.createElement('div');
+  toast.className = `toast toast-${variant}`;
+  toast.setAttribute('role', 'status');
+  toast.setAttribute('aria-live', 'polite');
+  toast.innerHTML = `<i class="fa-solid fa-circle-check" aria-hidden="true"></i><span>${message}</span>`;
+
+  document.body.appendChild(toast);
+
+  requestAnimationFrame(() => {
+    toast.classList.add('show');
+  });
+
+  setTimeout(() => {
+    toast.classList.remove('show');
+    setTimeout(() => toast.remove(), 250);
+  }, 2200);
+};
+
+const disableMobileZoom = () => {
+  if (!window.matchMedia('(pointer: coarse)').matches) {
+    return;
+  }
+
+  let lastTouchEnd = 0;
+
+  const preventGestureZoom = (event) => {
+    event.preventDefault();
+  };
+
+  document.addEventListener('gesturestart', preventGestureZoom, { passive: false });
+  document.addEventListener('gesturechange', preventGestureZoom, { passive: false });
+  document.addEventListener('gestureend', preventGestureZoom, { passive: false });
+
+  document.addEventListener(
+    'touchend',
+    (event) => {
+      const now = Date.now();
+      if (now - lastTouchEnd <= 300) {
+        event.preventDefault();
+      }
+      lastTouchEnd = now;
+    },
+    { passive: false }
+  );
+};
+
+disableMobileZoom();
+
 const serviceDisplayName = {
   'graphic-design': 'creative graphic designing',
   'web-development': 'web development'
@@ -138,6 +192,7 @@ form.addEventListener('submit', async (event) => {
 
     resultMessage.textContent = `Thank you, ${formData.firstName}! Your ${serviceDisplayName[formData.service]} request has been submitted.`;
     resultMessage.classList.add('success');
+    showToast('Form submitted successfully!');
 
     const successParams = new URLSearchParams({
       firstName: formData.firstName,
@@ -146,7 +201,9 @@ form.addEventListener('submit', async (event) => {
 
     form.reset();
     configureDeviceField();
-    window.location.href = `success.html?${successParams.toString()}`;
+    setTimeout(() => {
+      window.location.href = `success.html?${successParams.toString()}`;
+    }, 900);
   } catch (error) {
     console.error('Submission error:', error);
     const message = error.message || 'Submission failed';

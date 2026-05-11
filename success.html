@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
   <title>Submission Successful</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -34,6 +34,26 @@
   <footer class="page-footer">Powered by Nexlify Innovations</footer>
 
   <script>
+    if (window.matchMedia('(pointer: coarse)').matches) {
+      let lastTouchEnd = 0;
+      const preventGestureZoom = (event) => event.preventDefault();
+
+      document.addEventListener('gesturestart', preventGestureZoom, { passive: false });
+      document.addEventListener('gesturechange', preventGestureZoom, { passive: false });
+      document.addEventListener('gestureend', preventGestureZoom, { passive: false });
+      document.addEventListener(
+        'touchend',
+        (event) => {
+          const now = Date.now();
+          if (now - lastTouchEnd <= 300) {
+            event.preventDefault();
+          }
+          lastTouchEnd = now;
+        },
+        { passive: false }
+      );
+    }
+
     const successMessage = document.getElementById('successMessage');
     const params = new URLSearchParams(window.location.search);
     const firstName = params.get('firstName');
