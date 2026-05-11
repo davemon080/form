@@ -139,6 +139,7 @@ body {
   z-index: 1;
 }
 
+.main-container,
 .brand-bar,
 .form-header,
 .contact-form,
@@ -146,6 +147,39 @@ body {
 .page-footer {
   width: 100%;
   max-width: 760px;
+}
+
+.main-container {
+  position: relative;
+  z-index: 1;
+}
+
+@media (min-width: 900px) {
+  .main-container {
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+  }
+  
+  .brand-bar {
+    order: 2;
+    margin-bottom: 0;
+    flex-shrink: 0;
+    position: relative;
+    left: auto;
+  }
+  
+  .form-header,
+  .contact-form {
+    order: 1;
+    flex: 1;
+  }
+  
+  .brand-bar {
+    position: sticky;
+    top: 100px;
+    align-self: flex-start;
+  }
 }
 
 .brand-bar {
@@ -262,7 +296,7 @@ body {
   padding: 14px 12px 10px 36px;
   border-radius: 14px;
   border: 1px solid var(--border);
-  font-size: 0.9rem;
+  font-size: 16px;
   background: var(--field-bg);
   color: var(--text);
   transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
