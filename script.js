@@ -91,7 +91,11 @@ form.addEventListener('submit', async (event) => {
       body: JSON.stringify(formData)
     });
 
-    if (!response.ok) throw new Error('Submission failed');
+    const data = await response.json();
+    
+    if (!response.ok) {
+      throw new Error(data.error || 'Submission failed');
+    }
 
     resultMessage.textContent = `Thank you, ${formData.firstName}! Your ${
       formData.service === 'graphic-design' ? 'creative graphic designing' : 'web development'
@@ -105,7 +109,9 @@ form.addEventListener('submit', async (event) => {
     document.querySelector('.form-header').hidden = true;
     form.reset();
   } catch (error) {
-    resultMessage.textContent = 'Submission failed. Please try again.';
+    console.error('Submission error:', error);
+    const message = error.message || 'Submission failed';
+    resultMessage.textContent = `${message}. Please try again.`;
   } finally {
     setSubmittingState(false);
   }
