@@ -152,33 +152,35 @@ body {
 .main-container {
   position: relative;
   z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.form-section {
+  flex: 1;
+  max-width: 500px;
+}
+
+.image-section {
+  flex: 1;
+  display: none;
+  justify-content: center;
+  align-items: center;
 }
 
 @media (min-width: 900px) {
-  .main-container {
+  .image-section {
     display: flex;
-    gap: 40px;
-    align-items: flex-start;
   }
   
-  .brand-bar {
-    order: 2;
-    margin-bottom: 0;
-    flex-shrink: 0;
-    position: relative;
-    left: auto;
-  }
-  
-  .form-header,
-  .contact-form {
-    order: 1;
-    flex: 1;
-  }
-  
-  .brand-bar {
-    position: sticky;
-    top: 100px;
-    align-self: flex-start;
+  .side-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 20px;
   }
 }
 

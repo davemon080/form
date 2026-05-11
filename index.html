@@ -30,81 +30,86 @@
       </details>
     </section>
   </div>
+  <div class="brand-bar">
+    <img src="logo.png" alt="Nexlify Innovation logo" class="brand-logo" />
+    <p class="brand-name">Nexlify Innovation</p>
+  </div>
   <div class="main-container">
-    <div class="brand-bar">
-      <img src="logo.png" alt="Nexlify Innovation logo" class="brand-logo" />
-      <p class="brand-name">Nexlify Innovation</p>
-    </div>
-    <div class="form-header">
-      <h1>Training Program Onboarding</h1>
-      <p>Complete this form to join the Nexlify Innovation training program. Share your details so we can match you with the right learning track.</p>
-    </div>
-    <form id="contactForm" class="contact-form" novalidate>
-      <div class="form-grid">
-        <div class="name-row">
-          <label class="form-field">
-            <span class="field-label">First Name *</span>
+    <div class="form-section">
+      <div class="form-header">
+        <h1>Training Program Onboarding</h1>
+        <p>Complete this form to join the Nexlify Innovation training program. Share your details so we can match you with the right learning track.</p>
+      </div>
+      <form id="contactForm" class="contact-form" novalidate>
+        <div class="form-grid">
+          <div class="name-row">
+            <label class="form-field">
+              <span class="field-label">First Name *</span>
+              <div class="input-wrap">
+                <i class="fa-regular fa-user field-icon" aria-hidden="true"></i>
+                <input type="text" id="firstName" name="firstName" required />
+              </div>
+              <small class="error-message"></small>
+            </label>
+            <label class="form-field">
+              <span class="field-label">Last Name *</span>
+              <div class="input-wrap">
+                <i class="fa-regular fa-user field-icon" aria-hidden="true"></i>
+                <input type="text" id="lastName" name="lastName" required />
+              </div>
+              <small class="error-message"></small>
+            </label>
+          </div>
+          <label class="form-field full-width">
+            <span class="field-label">Others (optional)</span>
             <div class="input-wrap">
               <i class="fa-regular fa-user field-icon" aria-hidden="true"></i>
-              <input type="text" id="firstName" name="firstName" required />
+              <input type="text" id="others" name="others" />
+            </div>
+          </label>
+          <label class="form-field">
+            <span class="field-label">Email *</span>
+            <div class="input-wrap">
+              <i class="fa-regular fa-envelope field-icon" aria-hidden="true"></i>
+              <input type="email" id="email" name="email" required />
             </div>
             <small class="error-message"></small>
           </label>
           <label class="form-field">
-            <span class="field-label">Last Name *</span>
+            <span class="field-label">Phone Number *</span>
             <div class="input-wrap">
-              <i class="fa-regular fa-user field-icon" aria-hidden="true"></i>
-              <input type="text" id="lastName" name="lastName" required />
+              <i class="fa-solid fa-phone field-icon" aria-hidden="true"></i>
+              <input type="tel" id="phone" name="phone" pattern="[0-9\-\s]{7,15}" required />
+            </div>
+            <small class="error-message"></small>
+          </label>
+          <label class="form-field full-width">
+            <span class="field-label">Service Interest *</span>
+            <div class="input-wrap select-wrap">
+              <i class="fa-solid fa-briefcase field-icon" aria-hidden="true"></i>
+              <select id="service" name="service" required>
+                <option value=""></option>
+                <option value="graphic-design">Creative Graphic Designing</option>
+                <option value="web-development">Web Development</option>
+              </select>
+              <i class="fa-solid fa-chevron-down chevron-icon" aria-hidden="true"></i>
             </div>
             <small class="error-message"></small>
           </label>
         </div>
-        <label class="form-field full-width">
-          <span class="field-label">Others (optional)</span>
-          <div class="input-wrap">
-            <i class="fa-regular fa-user field-icon" aria-hidden="true"></i>
-            <input type="text" id="others" name="others" />
-          </div>
-        </label>
-        <label class="form-field">
-          <span class="field-label">Email *</span>
-          <div class="input-wrap">
-            <i class="fa-regular fa-envelope field-icon" aria-hidden="true"></i>
-            <input type="email" id="email" name="email" required />
-          </div>
-          <small class="error-message"></small>
-        </label>
-        <label class="form-field">
-          <span class="field-label">Phone Number *</span>
-          <div class="input-wrap">
-            <i class="fa-solid fa-phone field-icon" aria-hidden="true"></i>
-            <input type="tel" id="phone" name="phone" pattern="[0-9\-\s]{7,15}" required />
-          </div>
-          <small class="error-message"></small>
-        </label>
-        <label class="form-field full-width">
-          <span class="field-label">Service Interest *</span>
-          <div class="input-wrap select-wrap">
-            <i class="fa-solid fa-briefcase field-icon" aria-hidden="true"></i>
-            <select id="service" name="service" required>
-              <option value=""></option>
-              <option value="graphic-design">Creative Graphic Designing</option>
-              <option value="web-development">Web Development</option>
-            </select>
-            <i class="fa-solid fa-chevron-down chevron-icon" aria-hidden="true"></i>
-          </div>
-          <small class="error-message"></small>
-        </label>
-      </div>
-      <p class="consent-note">
-        By submitting this form, you agree that your phone number will be used to add you to the training WhatsApp group, and your class schedule will be sent to your email.
-      </p>
-      <button type="submit" class="submit-button">
-        <i class="fa-solid fa-paper-plane" aria-hidden="true"></i>
-        Submit Request
-      </button>
-      <p id="resultMessage" class="result-message" aria-live="polite"></p>
-    </form>
+        <p class="consent-note">
+          By submitting this form, you agree that your phone number will be used to add you to the training WhatsApp group, and your class schedule will be sent to your email.
+        </p>
+        <button type="submit" class="submit-button">
+          <i class="fa-solid fa-paper-plane" aria-hidden="true"></i>
+          Submit Request
+        </button>
+        <p id="resultMessage" class="result-message" aria-live="polite"></p>
+      </form>
+    </div>
+    <div class="image-section">
+      <img src="logo.png" alt="Training illustration" class="side-image" />
+    </div>
   </div>
   <section id="successSection" class="success-section" aria-live="polite" hidden>
     <div class="success-icon-wrap" aria-hidden="true">
